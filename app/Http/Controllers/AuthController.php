@@ -21,9 +21,14 @@ class AuthController extends Controller
         ];
 
         if (Auth::attempt($credenciales)) {
+            if (Auth::user()->rol === 'administrador') {
+                return to_route('admin.home');
+            }
             return to_route('home');
         } else {
-            return to_route('login');
+            return back()
+                ->withInput($request->only('email', 'remember'))
+                ->withErrors(['email' => 'El correo o la contraseña son incorrectos.']);
         }
     }
 
@@ -36,6 +41,17 @@ class AuthController extends Controller
 
     public function home()
     {
+        if (Auth::user()->rol === 'administrador') {
+            return to_route('admin.home');
+        }
         return view('modules/dashboard/home');
+    }
+
+    public function adminHome()
+    {
+        if (Auth::user()->rol !== 'administrador') {
+            return to_route('home');
+        }
+        return view('modules/dashboard/admin_home');
     }
 }
