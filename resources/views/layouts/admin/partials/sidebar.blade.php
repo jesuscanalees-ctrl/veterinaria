@@ -1,5 +1,5 @@
 {{-- ===== Sidebar ===== --}}
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
 
     {{-- Sidebar - Brand --}}
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.home') }}">
@@ -17,6 +17,14 @@
         <a class="nav-link" href="{{ route('admin.home') }}">
             <i class="fas fa-fw fa-home"></i>
             <span>Inicio</span>
+        </a>
+    </li>
+
+    {{-- Citas --}}
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-calendar-check"></i>
+            <span>Citas Médicas</span>
         </a>
     </li>
 
@@ -69,6 +77,8 @@
     {{-- Divider --}}
     <hr class="sidebar-divider">
 
+
+
     {{-- Sección: Administración --}}
     <div class="sidebar-heading">
         Administración
@@ -85,8 +95,8 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Usuarios:</h6>
-                <a class="collapse-item" href="#">Ver Usuarios</a>
-                <a class="collapse-item" href="#">Agregar Usuario</a>
+                <a class="collapse-item {{ request()->routeIs('usuarios.index') ? 'active' : '' }}" href="{{ route('usuarios.index') }}">Ver Usuarios</a>
+                <a class="collapse-item {{ request()->routeIs('usuarios.create') ? 'active' : '' }}" href="{{ route('usuarios.create') }}">Agregar Usuario</a>
             </div>
         </div>
     </li>

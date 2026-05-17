@@ -19,14 +19,14 @@
 
                             {{-- Imagen decorativa izquierda (visible desde lg) --}}
                             {{-- Panel izquierdo con logo --}}
-                            <div class="col-lg-6 d-none d-lg-flex align-items-center justify-content-center bg-gradient-primary">
+                            <div class="col-lg-6 d-none d-lg-flex align-items-center justify-content-center bg-gradient-info">
                                 <div class="text-center p-4">
                                     <img src="{{ asset('img/logo1.jpg') }}"
                                          alt="Logo Veterinaria"
                                          class="img-fluid rounded-circle shadow-lg mb-3"
                                          style="max-width: 220px; border: 5px solid rgba(255,255,255,0.5);">
-                                    <h2 class="text-white font-weight-bold mt-2">Veterinaria</h2>
-                                    <p class="text-white-50 small">Sistema de Gestión</p>
+                                    <h2 class="text-white font-weight-bold mt-2"><i class="fas fa-paw mr-2"></i>Veterinaria</h2>
+                                    <p class="text-white-50 small">Sistema de Gestión Clínica</p>
                                 </div>
                             </div>
 
@@ -35,7 +35,7 @@
                                 <div class="p-5">
 
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Sistema de Veterinaria</h1>
+                                        <h1 class="h4 text-gray-900 mb-4"><i class="fas fa-stethoscope text-info mr-2"></i>Sistema de Veterinaria</h1>
                                     </div>
 
                                     {{-- Mensaje de error --}}
@@ -96,7 +96,7 @@
                                         </div>
 
                                         {{-- Botón Ingresar --}}
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-info btn-user btn-block">
                                             <i class="fas fa-sign-in-alt mr-1"></i> Iniciar Sesión
                                         </button>
 
