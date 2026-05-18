@@ -19,5 +19,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/usuarios/{usuario}', [UserController::class, 'update'])->name('usuarios.update');
     Route::get('/usuarios/{usuario}', [UserController::class, 'show'])->name('usuarios.show');
     Route::delete('/usuarios/{usuario}', [UserController::class, 'destroy'])->name('usuarios.destroy');
+    Route::get('/expedientes', function () { return view('modules.dashboard.expedientes'); })->name('expedientes.index');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });

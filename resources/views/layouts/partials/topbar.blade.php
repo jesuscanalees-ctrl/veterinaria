@@ -6,6 +6,23 @@
         <i class="fa fa-bars"></i>
     </button>
 
+    {{-- Brand / Logo --}}
+    <a class="navbar-brand d-flex align-items-center justify-content-center mr-4" href="{{ route('home') }}">
+        <div class="sidebar-brand-icon text-primary">
+            <i class="fas fa-paw"></i>
+        </div>
+        <div class="sidebar-brand-text mx-2 text-dark font-weight-bold">Sistema Veterinario</div>
+    </a>
+
+    {{-- Enlaces Izquierdos --}}
+    <ul class="navbar-nav">
+        <li class="nav-item {{ request()->routeIs('expedientes.index') ? 'active' : '' }}">
+            <a class="nav-link text-gray-600 font-weight-bold" href="{{ route('expedientes.index') }}">
+                <i class="fas fa-folder fa-fw mr-1 text-primary"></i> Expedientes
+            </a>
+        </li>
+    </ul>
+
     {{-- Buscador --}}
     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
         <div class="input-group">
@@ -43,6 +60,8 @@
                 </form>
             </div>
         </li>
+
+
 
         {{-- Separador --}}
         <div class="topbar-divider d-none d-sm-block"></div>
