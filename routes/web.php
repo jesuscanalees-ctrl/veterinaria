@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExpedienteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/usuarios/{usuario}', [UserController::class, 'update'])->name('usuarios.update');
     Route::get('/usuarios/{usuario}', [UserController::class, 'show'])->name('usuarios.show');
     Route::delete('/usuarios/{usuario}', [UserController::class, 'destroy'])->name('usuarios.destroy');
+    
     Route::get('/expedientes', function () { return view('modules.dashboard.expedientes'); })->name('expedientes.index');
+    Route::get('/expedientes/buscar', [ExpedienteController::class, 'search'])->name('expedientes.search');
+    
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
