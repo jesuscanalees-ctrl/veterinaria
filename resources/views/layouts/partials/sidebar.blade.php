@@ -20,8 +20,12 @@
     </div>
 
     {{-- Diagnóstico --}}
-    <li class="nav-item">
-        <a class="nav-link" href="#">
+    <li class="nav-item {{ request()->routeIs('mascotas.consultas.diagnostico') ? 'active' : '' }}">
+        @php
+            $mascotaId  = request()->route('mascota');
+            $consultaId = request()->route('consulta');
+        @endphp
+        <a class="nav-link" href="{{ ($mascotaId && $consultaId) ? route('mascotas.consultas.diagnostico', [$mascotaId, $consultaId]) : '#' }}">
             <i class="fas fa-fw fa-notes-medical"></i>
             <span>Diagnóstico</span>
         </a>

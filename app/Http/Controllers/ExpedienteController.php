@@ -63,4 +63,37 @@ class ExpedienteController extends Controller
 
         return view('modules.dashboard.detalle_consulta', compact('mascota', 'consulta', 'antecedentes'));
     }
+
+    public function diagnostico(Mascota $mascota, Consulta $consulta)
+    {
+        abort_if($consulta->mascota_id !== $mascota->id, 404);
+
+        $mascota->load('dueno');
+        $consulta->load('veterinario');
+
+        return view('modules.dashboard.diagnostico', compact('mascota', 'consulta'));
+    }
+
+    public function guardarDiagnostico(Request $request, Mascota $mascota, Consulta $consulta)
+    {
+        abort_if($consulta->mascota_id !== $mascota->id, 404);
+
+        $request->validate([
+            'diagnostico' => 'nullable|string|max:65535',
+        ], [
+            'diagnostico.max' => 'El diagnóstico es demasiado largo.',
+        ]);
+
+        // Verificamos si ya existía un diagnóstico no vacío (removiendo tags HTML que pudiera dejar CKEditor)
+        $diagnosticoLimpio = trim(strip_tags($consulta->diagnostico));
+        $yaExiste = !empty($diagnosticoLimpio);
+
+        $consulta->update(['diagnostico' => $request->diagnostico]);
+
+        $mensaje = $yaExiste ? 'se actualizo con exito' : 'se guardo la nueva informacion';
+
+        return redirect()
+            ->route('mascotas.consultas.diagnostico', [$mascota->id, $consulta->id])
+            ->with('success', $mensaje);
+    }
 }
