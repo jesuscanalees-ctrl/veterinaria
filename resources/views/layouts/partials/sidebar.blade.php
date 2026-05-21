@@ -12,77 +12,80 @@
     {{-- Divider --}}
     <hr class="sidebar-divider my-0">
 
-    {{-- Dashboard --}}
-    <li class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('home') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span>
+    {{-- ════════════════════════════════
+         SECCIÓN: CONSULTA
+    ════════════════════════════════ --}}
+    <div class="sidebar-heading">
+        Consulta
+    </div>
+
+    {{-- Diagnóstico --}}
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-notes-medical"></i>
+            <span>Diagnóstico</span>
+        </a>
+    </li>
+
+    {{-- Tratamiento --}}
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-pills"></i>
+            <span>Tratamiento</span>
         </a>
     </li>
 
     {{-- Divider --}}
     <hr class="sidebar-divider">
 
-    {{-- Heading: Gestión --}}
+    {{-- ════════════════════════════════
+         SECCIÓN: ANTECEDENTES
+    ════════════════════════════════ --}}
     <div class="sidebar-heading">
-        Gestión
+        Antecedentes
     </div>
 
-    {{-- Pacientes --}}
-    <li class="nav-item {{ request()->routeIs('pacientes.*') ? 'active' : '' }}">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePacientes"
-            aria-expanded="true" aria-controls="collapsePacientes">
-            <i class="fas fa-fw fa-dog"></i>
-            <span>Pacientes</span>
+    {{-- Alergias --}}
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-allergies"></i>
+            <span>Alergias</span>
         </a>
-        <div id="collapsePacientes" class="collapse {{ request()->routeIs('pacientes.*') ? 'show' : '' }}"
-            aria-labelledby="headingPacientes" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Pacientes:</h6>
-                <a class="collapse-item {{ request()->routeIs('pacientes.index') ? 'active' : '' }}"
-                   href="#">Ver Pacientes</a>
-                <a class="collapse-item {{ request()->routeIs('pacientes.create') ? 'active' : '' }}"
-                   href="#">Agregar Paciente</a>
-            </div>
-        </div>
     </li>
 
-    {{-- Citas --}}
-    <li class="nav-item {{ request()->routeIs('citas.*') ? 'active' : '' }}">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCitas"
-            aria-expanded="true" aria-controls="collapseCitas">
-            <i class="fas fa-fw fa-calendar-check"></i>
-            <span>Citas</span>
+    {{-- Lesiones --}}
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-band-aid"></i>
+            <span>Lesiones</span>
         </a>
-        <div id="collapseCitas" class="collapse {{ request()->routeIs('citas.*') ? 'show' : '' }}"
-            aria-labelledby="headingCitas" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Citas:</h6>
-                <a class="collapse-item {{ request()->routeIs('citas.index') ? 'active' : '' }}"
-                   href="#">Ver Citas</a>
-                <a class="collapse-item {{ request()->routeIs('citas.create') ? 'active' : '' }}"
-                   href="#">Agendar Cita</a>
-            </div>
-        </div>
+    </li>
+
+    {{-- Patológicos --}}
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-heartbeat"></i>
+            <span>Patológicos</span>
+        </a>
     </li>
 
     {{-- Divider --}}
     <hr class="sidebar-divider">
 
-    {{-- Heading: Administración --}}
+    {{-- ════════════════════════════════
+         SECCIÓN: HISTORIAL
+    ════════════════════════════════ --}}
     <div class="sidebar-heading">
-        Administración
+        Historial
     </div>
 
-    {{-- Usuarios (solo admin) --}}
-    @if(Auth::check() && Auth::user()->role === 'administrador')
-    <li class="nav-item {{ request()->routeIs('usuarios.*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('usuarios.index') }}">
-            <i class="fas fa-fw fa-users"></i>
-            <span>Usuarios</span>
+    {{-- Alimentación --}}
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-utensils"></i>
+            <span>Alimentación</span>
         </a>
     </li>
-    @endif
 
     {{-- Divider --}}
     <hr class="sidebar-divider d-none d-md-block">

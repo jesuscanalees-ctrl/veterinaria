@@ -159,7 +159,7 @@
                                         </span>
                                     </td>
                                     <td class="text-center">
-                                        <a href="#" class="btn btn-sm btn-outline-info" title="Ver detalle">
+                                        <a href="{{ route('mascotas.consultas.detalle', [$mascota->id, $consulta->id]) }}" class="btn btn-sm btn-outline-info" title="Ver detalle">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </td>

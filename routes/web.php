@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/expedientes', function () { return view('modules.dashboard.expedientes'); })->name('expedientes.index');
     Route::get('/expedientes/buscar', [ExpedienteController::class, 'search'])->name('expedientes.search');
     Route::get('/mascotas/{mascota}/consultas', [ExpedienteController::class, 'consultasMascota'])->name('mascotas.consultas');
+    Route::get('/mascotas/{mascota}/consultas/{consulta}', [ExpedienteController::class, 'detalleConsulta'])->name('mascotas.consultas.detalle');
     
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });

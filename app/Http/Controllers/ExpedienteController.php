@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Consulta;
 use App\Models\Mascota;
 use Illuminate\Http\Request;
 
@@ -43,5 +44,23 @@ class ExpedienteController extends Controller
         $mascota->load(['dueno', 'consultas.veterinario']);
 
         return view('modules.dashboard.consultas_mascota', compact('mascota'));
+    }
+
+    public function detalleConsulta(Mascota $mascota, Consulta $consulta)
+    {
+        // Verificar que la consulta pertenece a la mascota
+        abort_if($consulta->mascota_id !== $mascota->id, 404);
+
+        $mascota->load('dueno');
+        $consulta->load('veterinario');
+
+        // Antecedentes: todas las consultas anteriores a la actual
+        $antecedentes = Consulta::where('mascota_id', $mascota->id)
+            ->where('id', '!=', $consulta->id)
+            ->with('veterinario')
+            ->orderByDesc('fecha_consulta')
+            ->get();
+
+        return view('modules.dashboard.detalle_consulta', compact('mascota', 'consulta', 'antecedentes'));
     }
 }
