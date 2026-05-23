@@ -32,8 +32,12 @@
     </li>
 
     {{-- Tratamiento --}}
-    <li class="nav-item">
-        <a class="nav-link" href="#">
+    <li class="nav-item {{ request()->routeIs('mascotas.consultas.tratamiento') ? 'active' : '' }}">
+        @php
+            $mascotaId  = request()->route('mascota');
+            $consultaId = request()->route('consulta');
+        @endphp
+        <a class="nav-link" href="{{ ($mascotaId && $consultaId) ? route('mascotas.consultas.tratamiento', [$mascotaId, $consultaId]) : '#' }}">
             <i class="fas fa-fw fa-pills"></i>
             <span>Tratamiento</span>
         </a>
@@ -50,16 +54,24 @@
     </div>
 
     {{-- Alergias --}}
-    <li class="nav-item">
-        <a class="nav-link" href="#">
+    <li class="nav-item {{ request()->routeIs('mascotas.consultas.alergias') ? 'active' : '' }}">
+        @php
+            $mascotaId  = request()->route('mascota');
+            $consultaId = request()->route('consulta');
+        @endphp
+        <a class="nav-link" href="{{ ($mascotaId && $consultaId) ? route('mascotas.consultas.alergias', [$mascotaId, $consultaId]) : '#' }}">
             <i class="fas fa-fw fa-allergies"></i>
             <span>Alergias</span>
         </a>
     </li>
 
     {{-- Lesiones --}}
-    <li class="nav-item">
-        <a class="nav-link" href="#">
+    <li class="nav-item {{ request()->routeIs('mascotas.consultas.lesiones') ? 'active' : '' }}">
+        @php
+            $mascotaId  = request()->route('mascota');
+            $consultaId = request()->route('consulta');
+        @endphp
+        <a class="nav-link" href="{{ ($mascotaId && $consultaId) ? route('mascotas.consultas.lesiones', [$mascotaId, $consultaId]) : '#' }}">
             <i class="fas fa-fw fa-band-aid"></i>
             <span>Lesiones</span>
         </a>

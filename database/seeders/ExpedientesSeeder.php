@@ -54,6 +54,8 @@ class ExpedientesSeeder extends Seeder
             'tipo_sangre' => 'DEA 1.1',
             'comportamiento' => 'Tranquilo',
             'es_adoptado' => true,
+            'alergias' => 'Alergias Alimentarias:Intolerancia severa al pollo y subproductos de trigo (le provoca dermatitis atópica y prurito generalizado).Alergias a Medicamentos:Penicilina: Reacción anafiláctica previa. Evitar por completo betalactámicos.',
+            'lesiones' => '<p><strong>Fracturas Previas:</strong></p><ul><li>Fractura de fémur en extremidad posterior derecha debido a atropello hace 2 años (reparada mediante osteosíntesis con placa y tornillos).</li></ul><p><strong>Cirugías Previas:</strong></p><ul><li>Orquiectomía (castración) realizada sin complicaciones.</li></ul>',
         ]);
 
         // 4. Crear dos Consultas vinculadas a la mascota y al veterinario

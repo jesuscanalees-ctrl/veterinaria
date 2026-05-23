@@ -28,5 +28,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/mascotas/{mascota}/consultas/{consulta}/diagnostico', [ExpedienteController::class, 'diagnostico'])->name('mascotas.consultas.diagnostico');
     Route::post('/mascotas/{mascota}/consultas/{consulta}/diagnostico', [ExpedienteController::class, 'guardarDiagnostico'])->name('mascotas.consultas.diagnostico.guardar');
     
+    Route::get('/mascotas/{mascota}/consultas/{consulta}/tratamiento', [ExpedienteController::class, 'tratamiento'])->name('mascotas.consultas.tratamiento');
+    Route::post('/mascotas/{mascota}/consultas/{consulta}/tratamiento', [ExpedienteController::class, 'guardarTratamiento'])->name('mascotas.consultas.tratamiento.guardar');
+    
+    Route::get('/mascotas/{mascota}/consultas/{consulta}/alergias', [ExpedienteController::class, 'alergias'])->name('mascotas.consultas.alergias');
+    Route::post('/mascotas/{mascota}/consultas/{consulta}/alergias', [ExpedienteController::class, 'guardarAlergias'])->name('mascotas.consultas.alergias.guardar');
+    
+    Route::get('/mascotas/{mascota}/consultas/{consulta}/lesiones', [ExpedienteController::class, 'lesiones'])->name('mascotas.consultas.lesiones');
+    Route::post('/mascotas/{mascota}/consultas/{consulta}/lesiones', [ExpedienteController::class, 'guardarLesiones'])->name('mascotas.consultas.lesiones.guardar');
+    
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });

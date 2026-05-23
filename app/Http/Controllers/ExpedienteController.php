@@ -96,4 +96,103 @@ class ExpedienteController extends Controller
             ->route('mascotas.consultas.diagnostico', [$mascota->id, $consulta->id])
             ->with('success', $mensaje);
     }
+
+    public function tratamiento(Mascota $mascota, Consulta $consulta)
+    {
+        abort_if($consulta->mascota_id !== $mascota->id, 404);
+
+        $mascota->load('dueno');
+        $consulta->load('veterinario');
+
+        return view('modules.dashboard.tratamiento', compact('mascota', 'consulta'));
+    }
+
+    public function guardarTratamiento(Request $request, Mascota $mascota, Consulta $consulta)
+    {
+        abort_if($consulta->mascota_id !== $mascota->id, 404);
+
+        $request->validate([
+            'tratamiento' => 'nullable|string|max:65535',
+        ], [
+            'tratamiento.max' => 'El tratamiento es demasiado largo.',
+        ]);
+
+        // Verificamos si ya existía un tratamiento no vacío (removiendo tags HTML que pudiera dejar CKEditor)
+        $tratamientoLimpio = trim(strip_tags($consulta->tratamiento));
+        $yaExiste = !empty($tratamientoLimpio);
+
+        $consulta->update(['tratamiento' => $request->tratamiento]);
+
+        $mensaje = $yaExiste ? 'se actualizo con exito' : 'se inserto con exito';
+
+        return redirect()
+            ->route('mascotas.consultas.tratamiento', [$mascota->id, $consulta->id])
+            ->with('success', $mensaje);
+    }
+
+    public function alergias(Mascota $mascota, Consulta $consulta)
+    {
+        abort_if($consulta->mascota_id !== $mascota->id, 404);
+
+        $mascota->load('dueno');
+        $consulta->load('veterinario');
+
+        return view('modules.dashboard.alergias', compact('mascota', 'consulta'));
+    }
+
+    public function guardarAlergias(Request $request, Mascota $mascota, Consulta $consulta)
+    {
+        abort_if($consulta->mascota_id !== $mascota->id, 404);
+
+        $request->validate([
+            'alergias' => 'nullable|string|max:65535',
+        ], [
+            'alergias.max' => 'El texto de alergias es demasiado largo.',
+        ]);
+
+        // Verificamos si ya existían alergias no vacías (removiendo tags HTML que pudiera dejar CKEditor)
+        $alergiasLimpio = trim(strip_tags($mascota->alergias));
+        $yaExiste = !empty($alergiasLimpio);
+
+        $mascota->update(['alergias' => $request->alergias]);
+
+        $mensaje = $yaExiste ? 'se actualizo con exito' : 'se inserto con exito';
+
+        return redirect()
+            ->route('mascotas.consultas.alergias', [$mascota->id, $consulta->id])
+            ->with('success', $mensaje);
+    }
+
+    public function lesiones(Mascota $mascota, Consulta $consulta)
+    {
+        abort_if($consulta->mascota_id !== $mascota->id, 404);
+
+        $mascota->load('dueno');
+        $consulta->load('veterinario');
+
+        return view('modules.dashboard.lesiones', compact('mascota', 'consulta'));
+    }
+
+    public function guardarLesiones(Request $request, Mascota $mascota, Consulta $consulta)
+    {
+        abort_if($consulta->mascota_id !== $mascota->id, 404);
+
+        $request->validate([
+            'lesiones' => 'nullable|string|max:65535',
+        ], [
+            'lesiones.max' => 'El texto de lesiones es demasiado largo.',
+        ]);
+
+        // Verificamos si ya existían lesiones no vacías (removiendo tags HTML que pudiera dejar CKEditor)
+        $lesionesLimpio = trim(strip_tags($mascota->lesiones));
+        $yaExiste = !empty($lesionesLimpio);
+
+        $mascota->update(['lesiones' => $request->lesiones]);
+
+        $mensaje = $yaExiste ? 'se actualizo con exito' : 'se inserto con exito';
+
+        return redirect()
+            ->route('mascotas.consultas.lesiones', [$mascota->id, $consulta->id])
+            ->with('success', $mensaje);
+    }
 }

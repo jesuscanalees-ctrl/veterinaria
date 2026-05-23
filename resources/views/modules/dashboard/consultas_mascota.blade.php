@@ -149,13 +149,13 @@
                                     <td>{{ $consulta->peso ?? '—' }}</td>
                                     <td>{{ $consulta->talla ?? '—' }}</td>
                                     <td>
-                                        <span title="{{ $consulta->diagnostico }}">
-                                            {{ Str::limit($consulta->diagnostico, 60) }}
+                                        <span title="{{ strip_tags($consulta->diagnostico) }}">
+                                            {{ Str::limit(strip_tags($consulta->diagnostico), 60) }}
                                         </span>
                                     </td>
                                     <td>
-                                        <span title="{{ $consulta->tratamiento }}">
-                                            {{ Str::limit($consulta->tratamiento, 60) }}
+                                        <span title="{{ strip_tags($consulta->tratamiento) }}">
+                                            {{ Str::limit(strip_tags($consulta->tratamiento), 60) }}
                                         </span>
                                     </td>
                                     <td class="text-center">
