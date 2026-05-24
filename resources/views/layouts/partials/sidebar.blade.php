@@ -78,8 +78,12 @@
     </li>
 
     {{-- Patológicos --}}
-    <li class="nav-item">
-        <a class="nav-link" href="#">
+    <li class="nav-item {{ request()->routeIs('mascotas.consultas.patologicos') ? 'active' : '' }}">
+        @php
+            $mascotaId  = request()->route('mascota');
+            $consultaId = request()->route('consulta');
+        @endphp
+        <a class="nav-link" href="{{ ($mascotaId && $consultaId) ? route('mascotas.consultas.patologicos', [$mascotaId, $consultaId]) : '#' }}">
             <i class="fas fa-fw fa-heartbeat"></i>
             <span>Patológicos</span>
         </a>
@@ -96,8 +100,12 @@
     </div>
 
     {{-- Alimentación --}}
-    <li class="nav-item">
-        <a class="nav-link" href="#">
+    <li class="nav-item {{ request()->routeIs('mascotas.consultas.alimentacion') ? 'active' : '' }}">
+        @php
+            $mascotaId  = request()->route('mascota');
+            $consultaId = request()->route('consulta');
+        @endphp
+        <a class="nav-link" href="{{ ($mascotaId && $consultaId) ? route('mascotas.consultas.alimentacion', [$mascotaId, $consultaId]) : '#' }}">
             <i class="fas fa-fw fa-utensils"></i>
             <span>Alimentación</span>
         </a>

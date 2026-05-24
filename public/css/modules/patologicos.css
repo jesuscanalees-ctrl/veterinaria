@@ -1,0 +1,132 @@
+/* Font settings */
+body {
+    font-family: 'Outfit', sans-serif !important;
+}
+
+/* CKEditor adjustment */
+.ck-editor__editable {
+    min-height: 220px;
+    font-size: .95rem;
+    line-height: 1.6;
+}
+
+/* Category Medical Badges */
+.badge-cronica {
+    background-color: #f3e8ff;
+    color: #7c3aed;
+    border: 1px solid #ddd6fe;
+}
+.badge-quirurgica {
+    background-color: #fff7ed;
+    color: #ea580c;
+    border: 1px solid #ffedd5;
+}
+.badge-infecciosa {
+    background-color: #ecfeff;
+    color: #0891b2;
+    border: 1px solid #cffafe;
+}
+.badge-congenita {
+    background-color: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fee2e2;
+}
+.badge-lesion {
+    background-color: #fefce8;
+    color: #ca8a04;
+    border: 1px solid #fef9c3;
+}
+.badge-otra {
+    background-color: #f3f4f6;
+    color: #4b5563;
+    border: 1px solid #e5e7eb;
+}
+
+/* Timeline Layout */
+.pathology-timeline {
+    position: relative;
+    padding-left: 32px;
+    list-style: none;
+}
+.pathology-timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 8px;
+    bottom: 8px;
+    width: 3px;
+    background: #e3e6f0;
+    border-radius: 2px;
+}
+.timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+}
+.timeline-badge {
+    position: absolute;
+    left: -32px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 3px solid #e74a3b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e74a3b;
+    font-size: 0.85rem;
+    z-index: 2;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.timeline-item:hover .timeline-badge {
+    background-color: #e74a3b;
+    color: #fff;
+    transform: scale(1.15);
+}
+.timeline-card {
+    border-radius: 8px;
+    border: 1px solid #e3e6f0;
+    background: #fff;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.01);
+}
+.timeline-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.04);
+}
+
+/* Related Medications Box */
+.meds-box {
+    background-color: #f8fafc;
+    border-left: 3px solid #64748b;
+    border-radius: 4px;
+    padding: 8px 12px;
+}
+.med-pill {
+    display: inline-block;
+    background-color: #eaedf1;
+    color: #334155;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.72rem;
+    margin-right: 4px;
+    margin-bottom: 2px;
+}
+
+/* Clinical Relationships panel */
+.relations-box {
+    background-color: #f0fdf4;
+    border: 1px solid #dcfce7;
+    border-radius: 6px;
+    padding: 10px 14px;
+}
+.relations-box a {
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s ease;
+}
+.relations-box a:hover {
+    color: #15803d !important;
+}

@@ -195,4 +195,128 @@ class ExpedienteController extends Controller
             ->route('mascotas.consultas.lesiones', [$mascota->id, $consulta->id])
             ->with('success', $mensaje);
     }
+
+    public function patologicos(Mascota $mascota, Consulta $consulta)
+    {
+        abort_if($consulta->mascota_id !== $mascota->id, 404);
+
+        $mascota->load(['dueno', 'historialPatologico.consulta.veterinario']);
+        $consulta->load('veterinario');
+
+        // Obtener historial cronológico de patologías
+        $historial = $mascota->historialPatologico;
+
+        return view('modules.dashboard.patologicos', compact('mascota', 'consulta', 'historial'));
+    }
+
+    public function guardarPatologicos(Request $request, Mascota $mascota, Consulta $consulta)
+    {
+        abort_if($consulta->mascota_id !== $mascota->id, 404);
+
+        $request->validate([
+            'categoria' => 'required|string|max:100',
+            'descripcion' => 'required|string|max:65535',
+            'medicamentos' => 'nullable|string|max:255',
+        ], [
+            'categoria.required' => 'La categoría del antecedente es obligatoria.',
+            'descripcion.required' => 'La descripción clínica es obligatoria.',
+            'descripcion.max' => 'La descripción es demasiado larga.',
+            'medicamentos.max' => 'La lista de medicamentos relacionados es demasiado larga.',
+        ]);
+
+        // Registrar en el historial relacional
+        \App\Models\HistorialPatologico::create([
+            'mascota_id' => $mascota->id,
+            'consulta_id' => $consulta->id,
+            'categoria' => $request->categoria,
+            'descripcion' => $request->descripcion,
+            'medicamentos' => $request->medicamentos,
+        ]);
+
+        // Compilar resumen HTML ordenado cronológicamente para retrocompatibilidad
+        $todos = $mascota->historialPatologico()->get();
+        $resumenHtml = '';
+        foreach ($todos as $item) {
+            $fecha = $item->created_at ? $item->created_at->format('d/m/Y') : '';
+            $medsStr = !empty($item->medicamentos) ? " <span class='text-muted' style='font-size: 0.85em;'>(Medicamentos: <em>{$item->medicamentos}</em>)</span>" : "";
+            $resumenHtml .= "<div style='margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #f0f0f0;'>"
+                         . "<span class='badge' style='background-color:#eaecf4; color:#4e73df; font-size:0.75em; padding:3px 6px; margin-right:6px;'>{$item->categoria}</span>"
+                         . "<span class='text-xs text-muted' style='float:right;'>{$fecha}</span>"
+                         . "<div style='margin-top:6px; font-size:0.95em;'>{$item->descripcion}</div>"
+                         . $medsStr
+                         . "</div>";
+        }
+
+        $mascota->update(['patologicos' => $resumenHtml]);
+
+        return redirect()
+            ->route('mascotas.consultas.patologicos', [$mascota->id, $consulta->id])
+            ->with('success', 'se guardo el antecedente patologico con exito');
+    }
+
+    public function alimentacion(Mascota $mascota, Consulta $consulta)
+    {
+        abort_if($consulta->mascota_id !== $mascota->id, 404);
+
+        $mascota->load(['dueno', 'historialAlimentacion.consulta.veterinario']);
+        $consulta->load('veterinario');
+
+        // Obtener historial completo de dietas
+        $historial = $mascota->historialAlimentacion;
+
+        // Obtener la dieta más reciente para pre-cargar el formulario
+        $dietaActual = $historial->first();
+
+        return view('modules.dashboard.alimentacion', compact('mascota', 'consulta', 'historial', 'dietaActual'));
+    }
+
+    public function guardarAlimentacion(Request $request, Mascota $mascota, Consulta $consulta)
+    {
+        abort_if($consulta->mascota_id !== $mascota->id, 404);
+
+        $request->validate([
+            'tipo_comida' => 'required|string|max:100',
+            'frecuencia' => 'nullable|array',
+            'detalles' => 'nullable|string|max:65535',
+            'condicion' => 'required|string|max:100',
+            'recomendacion' => 'nullable|string|max:65535',
+        ], [
+            'tipo_comida.required' => 'El tipo de comida es obligatorio.',
+            'condicion.required' => 'La condición de salud/dieta es obligatoria.',
+            'detalles.max' => 'Los detalles son demasiado largos.',
+            'recomendacion.max' => 'La recomendación es demasiado larga.',
+        ]);
+
+        $frecuencia = $request->input('frecuencia', []);
+
+        // Guardar registro en el historial relacional
+        \App\Models\HistorialAlimentacion::create([
+            'mascota_id' => $mascota->id,
+            'consulta_id' => $consulta->id,
+            'tipo_comida' => $request->tipo_comida,
+            'frecuencia' => $frecuencia,
+            'detalles' => $request->detalles,
+            'condicion' => $request->condicion,
+            'recomendacion' => $request->recomendacion,
+        ]);
+
+        // Guardar un resumen en el campo plano de la mascota para retrocompatibilidad
+        $frecuenciaTexto = !empty($frecuencia) ? implode(', ', $frecuencia) : 'No especificada';
+        $resumenHtml = "<strong>Tipo de Comida:</strong> {$request->tipo_comida}<br>"
+                     . "<strong>Horarios:</strong> {$frecuenciaTexto}<br>"
+                     . "<strong>Condición:</strong> {$request->condicion}<br>";
+
+        if (!empty($request->recomendacion)) {
+            $resumenHtml .= "<strong>Recomendación Clínica:</strong> {$request->recomendacion}<br>";
+        }
+        if (!empty($request->detalles)) {
+            $resumenHtml .= "<strong>Detalles Adicionales:</strong> {$request->detalles}";
+        }
+
+        $mascota->update(['alimentacion' => $resumenHtml]);
+
+        return redirect()
+            ->route('mascotas.consultas.alimentacion', [$mascota->id, $consulta->id])
+            ->with('success', 'se guardo la nueva informacion de la dieta con exito');
+    }
 }

@@ -21,6 +21,8 @@ class Mascota extends Model
         'es_adoptado',
         'alergias',
         'lesiones',
+        'patologicos',
+        'alimentacion',
     ];
 
     public function dueno()
@@ -31,6 +33,16 @@ class Mascota extends Model
     public function consultas()
     {
         return $this->hasMany(Consulta::class);
+    }
+
+    public function historialAlimentacion()
+    {
+        return $this->hasMany(HistorialAlimentacion::class)->orderByDesc('created_at');
+    }
+
+    public function historialPatologico()
+    {
+        return $this->hasMany(HistorialPatologico::class)->orderByDesc('created_at');
     }
 
     public function toSearchableArray()

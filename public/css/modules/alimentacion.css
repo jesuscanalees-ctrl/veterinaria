@@ -1,0 +1,113 @@
+/* Premium visual overrides */
+body {
+    font-family: 'Outfit', sans-serif !important;
+}
+
+.ck-editor__editable {
+    min-height: 200px;
+    font-size: .92rem;
+    line-height: 1.6;
+}
+
+/* Styled Checkboxes */
+.schedule-check-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.schedule-btn {
+    flex: 1;
+    min-width: 100px;
+    position: relative;
+    text-align: center;
+    padding: 10px 14px;
+    border: 2px solid #eaecf4;
+    background-color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: #5a5c69;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+}
+.schedule-btn i {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+    transition: transform 0.2s ease;
+}
+.schedule-btn:hover {
+    border-color: #1cc88a;
+    color: #1cc88a;
+    background-color: #f6fdfa;
+}
+.schedule-btn:hover i {
+    transform: scale(1.15);
+}
+.schedule-check-group input[type="checkbox"] {
+    display: none;
+}
+.schedule-check-group input[type="checkbox"]:checked + .schedule-btn {
+    background-color: #1cc88a;
+    border-color: #1cc88a;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(28, 200, 138, 0.25);
+}
+
+/* Timeline styles */
+.diet-timeline {
+    position: relative;
+    padding-left: 32px;
+    list-style: none;
+}
+.diet-timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 8px;
+    bottom: 8px;
+    width: 3px;
+    background: #e3e6f0;
+    border-radius: 2px;
+}
+.timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+}
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+.timeline-badge {
+    position: absolute;
+    left: -32px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #f8f9fc;
+    border: 3px solid #1cc88a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1cc88a;
+    font-size: 0.8rem;
+    z-index: 2;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.timeline-item:hover .timeline-badge {
+    background-color: #1cc88a;
+    color: #fff;
+    transform: scale(1.1);
+}
+.timeline-card {
+    border-radius: 8px;
+    border: 1px solid #e3e6f0;
+    background: #fff;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+.timeline-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+}

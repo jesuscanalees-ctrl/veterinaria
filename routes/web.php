@@ -37,5 +37,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/mascotas/{mascota}/consultas/{consulta}/lesiones', [ExpedienteController::class, 'lesiones'])->name('mascotas.consultas.lesiones');
     Route::post('/mascotas/{mascota}/consultas/{consulta}/lesiones', [ExpedienteController::class, 'guardarLesiones'])->name('mascotas.consultas.lesiones.guardar');
     
+    Route::get('/mascotas/{mascota}/consultas/{consulta}/patologicos', [ExpedienteController::class, 'patologicos'])->name('mascotas.consultas.patologicos');
+    Route::post('/mascotas/{mascota}/consultas/{consulta}/patologicos', [ExpedienteController::class, 'guardarPatologicos'])->name('mascotas.consultas.patologicos.guardar');
+    
+    Route::get('/mascotas/{mascota}/consultas/{consulta}/alimentacion', [ExpedienteController::class, 'alimentacion'])->name('mascotas.consultas.alimentacion');
+    Route::post('/mascotas/{mascota}/consultas/{consulta}/alimentacion', [ExpedienteController::class, 'guardarAlimentacion'])->name('mascotas.consultas.alimentacion.guardar');
+    
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
